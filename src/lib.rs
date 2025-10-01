@@ -13,6 +13,10 @@ pub fn fmt_compact<T: Debug>(t: &T, f: &mut Formatter<'_>) -> fmt::Result {
 }
 
 /// Newtype wrapper that forces compact `Debug` no matter how it's printed.
+#[repr(transparent)]
+#[derive(
+    Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, serde::Serialize, serde::Deserialize,
+)]
 pub struct Compact<T>(pub T);
 
 impl<T: Debug> Debug for Compact<T> {
